@@ -119,6 +119,13 @@ function selectFilter() {
   });
 }
 
+$("body").click(() => {
+  $(".filter-modal").hide();
+});
+$(".filter-head").click((e) => {
+  e.stopPropagation();
+});
+
 let filterId = [];
 function filter(txt) {
   let filterArr = toShow.filter(({ region }) => {
@@ -223,14 +230,19 @@ function showDetails(el, data) {
           </div>
           <div class="border-countries">
             Border Countries:
-            ${el.borders.map((v) => {
-              $.each(data, function (i, p) {
-                if (v == p.alpha3Code) {
-                  console.log(v, p.alpha3Code);
-                  return `<div class="tag">${p.name}</div> `;
-                }
-              });
-            })}
+            ${el.borders
+              .map((v) => {
+                let nameBdr = "";
+                $.each(data, function (i, p) {
+                  if (v == p.alpha3Code) {
+                    nameBdr = p.name;
+                    return;
+                  }
+                });
+
+                return `<div class="tag">${nameBdr}</div> `;
+              })
+              .join("")}
             
           </div>
         </div>
@@ -247,7 +259,7 @@ function borderCount(data) {
   $(".tag").click(function () {
     let code = this.textContent;
     $.each(data, function (i, v) {
-      if (code == v.alpha3Code) {
+      if (code == v.name) {
         showDetails(v, data);
         $(".modal").css("display", "flex");
       }
