@@ -8,6 +8,15 @@ $(".theme").click(() => {
   $("body").attr("data-theme", `${currTheme == "light" ? `dark` : `light`}`);
 });
 
+// ================================MOVE_TOP============================
+$(".move-to-top").click(() => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+});
+
 // ==============================API==========================
 let arrName = [];
 let dataArr = [];
@@ -149,6 +158,7 @@ function filter(txt) {
 
 function description(data) {
   $(".block").click(function () {
+    $("body").css("overflow", "hidden");
     // console.log(this.dataset.info);
     let code = this.dataset.info;
     $.each(data, function (i, v) {
@@ -160,6 +170,7 @@ function description(data) {
     // showDetails(data);
     $(".back-btn ").click(() => {
       $(".modal").css("display", "none");
+      $("body").css("overflow", "auto");
       // alert();
     });
     borderCount(data);
