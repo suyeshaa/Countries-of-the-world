@@ -277,6 +277,7 @@ function borderCount(data) {
     });
     $(".back-btn ").click(() => {
       $(".modal").css("display", "none");
+      $("body").css("overflow", "scroll");
       // alert();
     });
   });
