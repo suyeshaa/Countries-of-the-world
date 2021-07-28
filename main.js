@@ -170,7 +170,7 @@ function description(data) {
     // showDetails(data);
     $(".back-btn ").click(() => {
       $(".modal").css("display", "none");
-      $("body").css("overflow", "auto");
+      $("body").css("overflow", "scroll");
       // alert();
     });
     borderCount(data);

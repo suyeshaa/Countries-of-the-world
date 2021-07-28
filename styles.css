@@ -445,12 +445,3 @@ input:focus {
     padding: 15px 15px;
   }
 }
-
-@media (max-width: 588px) {
-  .division {
-    width: 65%;
-  }
-  .search-bar input {
-    width: 100px !important;
-  }
-}
