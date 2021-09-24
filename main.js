@@ -22,7 +22,7 @@ let arrName = [];
 let dataArr = [];
 let filtered = false;
 
-fetch("https://restcountries.eu/rest/v2/all")
+fetch("https://restcountries.com/v2/all")
   .then((res) => res.json())
   .then((data) => {
     console.log(data);
@@ -41,7 +41,7 @@ function showBlocks(data) {
     .map((el) => {
       return ` <div class="block" data-info=${el.alpha2Code}>
     <div class="flag">
-      <img src=${el.flag} />
+      <img src=${el.flags[0]} />
     </div>
     <div class="descrip">
       <span class="name">${el.name}</span>
@@ -202,7 +202,7 @@ function showDetails(el, data) {
   </div>
       <div class="division">
       
-          <img src=${el.flag} />
+          <img src=${el.flags[0]} />
         
         <div class="right">
           <div class="country-name">${el.name}</div>
@@ -229,7 +229,7 @@ function showDetails(el, data) {
                 }</span>
               </p>
               <p class="expl">Currencies: <span class="temp">${
-                el.currencies[0].name
+                el.currencies ? el.currencies[0].name : "N/A"
               }</span></p>
               <p class="expl">
                 Languages: <span class="temp"></span>
@@ -241,19 +241,23 @@ function showDetails(el, data) {
           </div>
           <div class="border-countries">
             Border Countries:
-            ${el.borders
-              .map((v) => {
-                let nameBdr = "";
-                $.each(data, function (i, p) {
-                  if (v == p.alpha3Code) {
-                    nameBdr = p.name;
-                    return;
-                  }
-                });
+            ${
+              el.borders
+                ? el.borders
+                    .map((v) => {
+                      let nameBdr = "";
+                      $.each(data, function (i, p) {
+                        if (v == p.alpha3Code) {
+                          nameBdr = p.name;
+                          return;
+                        }
+                      });
 
-                return `<div class="tag">${nameBdr}</div> `;
-              })
-              .join("")}
+                      return `<div class="tag">${nameBdr}</div> `;
+                    })
+                    .join("")
+                : ""
+            }
             
           </div>
         </div>
